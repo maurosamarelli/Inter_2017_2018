@@ -103,7 +103,6 @@ def get_formations(teamsData):
             aux.minute = aux.minute.astype(object)
             aux.playerIn = aux.playerIn.astype(object)
             df = pd.concat([df, aux])
-        teamsData[matchId].drop("formation", inplace=True)
     return df
 
 def get_event_locations(data, column):
@@ -183,9 +182,8 @@ def label_positive_passes(data, column):
     positive = []
     for list_tags in data[column]:
         outcome = "no"
-        for tag in list_tags:
-            if tag == 1801:
-                outcome = "yes"
+        if list_tags.find('1801') != -1:
+            outcome = "yes"
         positive.append(outcome)
     data = data.reset_index(drop=True)
     data["positive"] = pd.Series(positive)
