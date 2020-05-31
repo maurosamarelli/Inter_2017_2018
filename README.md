@@ -23,7 +23,7 @@ Notebook Description:
   - calculate forward pass percentage for each player in each match
   - focus on Brozovic: count of total passes evolution during the season
   - focus on Brozovic: pass accuracy evolution during the season
-  - focus on Brozovic: forward pass evolution during the season
+  - focus on Brozovic: forward pass percentage evolution during the season
   - rank players by number of total passes in the season
   - rank players by pass accuracy in the season
   - rank players by forward pass percentage in the season
