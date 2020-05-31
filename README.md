@@ -32,3 +32,5 @@ Notebook Description:
   - develop a function which is able to calculate time possession of a team, time possession of the opponent, time ball duels and time stopped
   - calculate ball possession percentage for each match
   - evolution of ball possession percentage during the season
+  - calculate ball possession percentage in the opponent half pitch
+  - evolution of ball possession percentage in the opponent half pitch during the season
