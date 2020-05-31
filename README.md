@@ -10,8 +10,11 @@ In particulary, json files about soccer data can be downloaded executing data_do
 Notebook Description:
 
 01 players.ipynb: get and explore data about inter players
+
 02 team.ipynb: get and explore data about inter team
+
 03 matches.ipynb: get and explore data about inter matches
+
 04 events.ipynb: get and explore data about inter matches events
 
 05 pass_analysis.ipynb
