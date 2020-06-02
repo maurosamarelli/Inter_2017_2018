@@ -38,3 +38,8 @@ Notebook Description:
   - rank matches by ball possession percentage
   - rank matches by ball possession percentage in the opponent field
   - rank matches by dangerousness of the possession
+  
+ 07 shot_analysis.ipynb
+  - rank players by number of total shots in the season
+  - rank players by number of goals in the season
+  - rank players by number of shots per goal or by number of percentage of goal on shots
