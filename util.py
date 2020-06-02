@@ -134,67 +134,83 @@ def get_event_locations(data, column):
 
 def get_event_tags(data, column):
     '''
-        questa funzione consente di collezionare i tag (in formato lista) di un evento all'interno di una colonna del dataframe
-        parametri:
-        1) data: dataframe relativo ai dati degli eventi dei match
-        2) column: nome colonna in cui sono memorizzati i tags associati all'evento sottoforma di dizionario
+        questa funzione consente di spacchettare i tag associati agli eventi di un match e di creare una colonna per ogni tag
+        per ogni evento, si attribuisce "yes" alle colonne dei tag associato all'evento e "no" alle colonne dei tag non associati all'evento
+        la funzione utilizza un dizionario avente come chiavi i codici dei tag e come valori le descrizione dei tag
+        le descrizioni dei tag diventano i nomi delle colonne aggiunte nel dataframe
+        il dizionario si basa sulla documentazione consultabile al link apidocs.wyscout.com
     '''
-    tags = []
-    for list_tags in data[column]:
-        nested_tags = []
-        for el in list_tags:
-            nested_tags.append(el["id"])
-        tags.append(nested_tags)
-    data = data.reset_index(drop=True)
-    data.drop("tags", axis=1, inplace=True)
-    data["tags"] = pd.Series(tags)
-    return data    
-    
-def create_tags_dict():
-    '''
-        questa funzione consente di creare un dizionario associando ad ogni tag la sua descrizione dell'evento
-        please see apidocs.wyscout.com
-    '''
-    tags_dict = {}
-    tags_dict[801] = "high"
-    tags_dict[901] = "through"
-    tags_dict[1801] = "accurate"
-    tags_dict[1802] = "not accurate"
-    tags_dict[1001] = "fairplay"
+    tags_dict = dict()
+    tags_dict[101] = "goal"
+    tags_dict[102] = "own_goal"
     tags_dict[301] = "assist"
-    tags_dict[302] = "key pass"
-    tags_dict[1901] = "counter attack"
-    tags_dict[401] = "left foot"
-    tags_dict[402] = "right foot"
-    tags_dict[2001] = "dangerous ball lost"
-    tags_dict[403] = "head/body"
+    tags_dict[302] = "key_pass"
+    tags_dict[1901] = "counter_attack"
+    tags_dict[401] = "left_foot"
+    tags_dict[402] = "right_foot"
+    tags_dict[403] = "head_body"
+    tags_dict[1101] = "direct"
+    tags_dict[1102] = "indirect"
+    tags_dict[2001] = "dangerous_ball_lost"
     tags_dict[2101] = "blocked"
+    tags_dict[801] = "high"
+    tags_dict[802] = "low"
     tags_dict[1401] = "interception"
-    return tags_dict
-
-def label_positive_passes(data, column):
-    '''
-        questa funzione consente di etichettare un evento (passaggio) se ha avuto esito positivo o negativo (tag=1801)
-        parametri:
-        1) data: dataframe relativo ai dati degli eventi (passaggi) dei match
-        2) column: nome colonna in cui sono memorizzati i tags associati all'evento (passaggio) sottoforma di lista (vedi function get_event_tags)
-    '''
-    positive = []
-    for list_tags in data[column]:
-        outcome = "no"
-        if list_tags.find('1801') != -1:
-            outcome = "yes"
-        positive.append(outcome)
-    data = data.reset_index(drop=True)
-    data["positive"] = pd.Series(positive)
+    tags_dict[1501] = "clearance"
+    tags_dict[201] = "opportunity"
+    tags_dict[1301] = "feint"
+    tags_dict[1302] = "missed_ball"
+    tags_dict[501] = "free_space_right"
+    tags_dict[502] = "free_space_left"
+    tags_dict[503] = "take_on_left"
+    tags_dict[504] = "take_on_right"
+    tags_dict[1601] = "sliding_tackle"
+    tags_dict[601] = "anticipated"
+    tags_dict[602] = "anticipation"
+    tags_dict[1701] = "red_card"
+    tags_dict[1702] = "yellow_card"
+    tags_dict[1703] = "second_yellow_card"
+    tags_dict[1201] = "goal_low_center"
+    tags_dict[1202] = "goal_low_right"
+    tags_dict[1203] = "goal_center"
+    tags_dict[1204] = "goal_center_left"
+    tags_dict[1205] = "goal_low_left"
+    tags_dict[1206] = "goal_center_right"
+    tags_dict[1207] = "goal_high_center"
+    tags_dict[1208] = "goal_high_left"
+    tags_dict[1209] = "goal_high_right"
+    tags_dict[1210] = "out_low_right"
+    tags_dict[1211] = "out_center_left"
+    tags_dict[1212] = "out_low_left"
+    tags_dict[1213] = "out_center_right"
+    tags_dict[1214] = "out_high_center"
+    tags_dict[1215] = "out_high_left"
+    tags_dict[1216] = "out_high_right"
+    tags_dict[1217] = "post_low_right"
+    tags_dict[1218] = "post_center_left"
+    tags_dict[1219] = "post_low_left"
+    tags_dict[1220] = "post_center_right"
+    tags_dict[1221] = "post_high_center"
+    tags_dict[1222] = "post_high_left"
+    tags_dict[1223] = "post_high_right"
+    tags_dict[901] = "through"
+    tags_dict[1001] = "fairplay"
+    tags_dict[701] = "lost"
+    tags_dict[702] = "neutral"
+    tags_dict[703] = "won"
+    tags_dict[1801] = "accurate"
+    tags_dict[1802] = "not_accurate"
+    
+    for tag in tags_dict.keys():
+        flag = []
+        for list_tags in data[column]:
+            x = "no"
+            for el in list_tags:
+                if el["id"] == tag:
+                    x = "yes"
+            flag.append(x)
+        data = data.reset_index(drop=True)
+        data[tags_dict[tag]] = pd.Series(flag)
+                
+    data.drop(column, axis=1, inplace=True)
     return data
-
-def gets_unique_tags(data, column):
-    '''
-        questa funzione consente di ottenere il set di tag univoci presenti negli eventi di un dataframe
-        parametri:
-        1) data: dataframe relativo ai dati degli eventi dei match
-        2) column: nome colonna in cui sono memorizzati i tags associati all'evento sottoforma di lista (vedi function get_event_tags)
-    '''
-    import itertools
-    return set(itertools.chain.from_iterable(data[column]))
