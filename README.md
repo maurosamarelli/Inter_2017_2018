@@ -34,3 +34,7 @@ Notebook Description:
   - evolution of ball possession percentage during the season
   - calculate ball possession percentage in the opponent half pitch
   - evolution of ball possession percentage in the opponent half pitch during the season
+  - calculate harmonic mean between ball possession percentage and ball possession percentage in the opponent field (dangerousness of the possession)
+  - rank matches by ball possession percentage
+  - rank matches by ball possession percentage in the opponent field
+  - rank matches by dangerousness of the possession
