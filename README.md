@@ -4,10 +4,14 @@ Data analysis about Football Club Internazionale season 2017-2018, i.e. when we 
 This repository uses [Wyscout](https://wyscout.com/) data to extract useful information for the tactical point of view.
 
 Dataset Links
-'matches' : 'https://ndownloader.figshare.com/files/14464622',
-'events' : 'https://ndownloader.figshare.com/files/14464685',
-'players' : 'https://ndownloader.figshare.com/files/15073721',
-'teams': 'https://ndownloader.figshare.com/files/15073697',
+
+'matches' : 'https://ndownloader.figshare.com/files/14464622'.
+
+'events' : 'https://ndownloader.figshare.com/files/14464685'.
+
+'players' : 'https://ndownloader.figshare.com/files/15073721'.
+
+'teams': 'https://ndownloader.figshare.com/files/15073697'.
 
 Notebook Descriptions:
 
