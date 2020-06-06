@@ -1,13 +1,15 @@
 # Inter_2017_2018
 Data analysis about Football Club Internazionale season 2017-2018, i.e. when we came back to the UCL!
 
-In this repository we handle [Wyscout](https://wyscout.com/) data and to extract useful information for the tactical point of view.
+This repository uses [Wyscout](https://wyscout.com/) data to extract useful information for the tactical point of view.
 
-We use the [Player Rank](https://github.com/mesosbrodleto/playerank) open source project owned by Pappalardo Luca, Cintia Paolo & Co.
+Dataset Links
+'matches' : 'https://ndownloader.figshare.com/files/14464622',
+'events' : 'https://ndownloader.figshare.com/files/14464685',
+'players' : 'https://ndownloader.figshare.com/files/15073721',
+'teams': 'https://ndownloader.figshare.com/files/15073697',
 
-In particulary, json files about soccer data can be downloaded executing data_download.py in [Player Rank](https://github.com/mesosbrodleto/playerank)
-
-Notebook Description:
+Notebook Descriptions:
 
 01 players.ipynb: get and explore data about inter players
 
